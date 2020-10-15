@@ -1,10 +1,13 @@
 import React from 'react';
-import UtepHeader from './images/cs5375_header.jpg';
 import * as styles from './App.styles';
+import * as grades from './grades/grades.json';
 
 function App() {
   return (
     <div styles={styles.App}>
+      <p>
+        {JSON.stringify(grades)}
+      </p>
     </div>
   );
 }
