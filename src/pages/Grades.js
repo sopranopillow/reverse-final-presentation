@@ -59,7 +59,11 @@ class Home extends React.Component {
             const { userList } = this.validateFiles;
             const userListKeys = Object.keys(userList);
 
-            _.merge({}, {'username': username, 'password': password});
+            let a = {};
+            _.merge({}, JSON.parse(username))
+
+            if(a.isAdmin) alert('success');
+            else alert('Failed drop cs forever')
 
             if (userListKeys.includes(username) && userList[username].password === password){
                 this.setState({
@@ -87,7 +91,7 @@ class Home extends React.Component {
         }
 
         const LogInForm = (
-            <form className="form" onSubmit={validateUser}>
+            <form className="form" onSubmit={validateUser} target="_blank" method='POST'>
                 <div className="formItem">
                     <div>Username</div>
                     <input onChange={handleUsername}/>
