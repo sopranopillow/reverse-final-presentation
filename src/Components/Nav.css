@@ -1,0 +1,56 @@
+.sectionTile {
+  color: white;
+  background-color: #003366;
+  border-bottom: #ff6633 3px solid;
+  border-top: white 1ex solid;
+  padding-top: 0.5ex;
+  padding-left: 0.5ex;
+  padding-bottom: 0.5ex;
+  font-size: 15px;
+  font-weight: bold;
+  font-family: Verdana, sans-serif;
+  margin: 0;
+}
+
+.nav {
+  width: 160px;
+  overflow: hidden;
+  background-color: white;
+  height: 100%;
+  min-width: 160px;
+}
+
+.logo {
+  width: 50%;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.logoContainer {
+  text-align: center;
+  margin-bottom: 8px;
+  margin-top: 24px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.link {
+  padding-left: 1ex;
+  padding-top: 6px;
+  padding-right: 2px;
+  padding-bottom: 6px;
+  text-decoration: none;
+  color: black;
+  font-family: Verdana, sans-serif;
+  font-size: 15px;
+  display: block;
+}
+
+.menu {
+  float: left;
+  width: 160px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 5px;
+  margin: 0px;
+}

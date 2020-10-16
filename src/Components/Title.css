@@ -1,0 +1,9 @@
+.title {
+  background-color: #003366;
+  font-size: 22pt;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  padding: 0.5ex 1ex 1ex 1ex;
+  border-bottom: #ff6633 0.4ex solid;
+}

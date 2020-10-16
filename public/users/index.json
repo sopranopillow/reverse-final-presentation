@@ -1,0 +1,17 @@
+{
+    "userList": {
+        "rigo123": {
+            "file": "321ogir",
+            "password": "password"
+        },
+        "esteban123": {
+            "file": "321nabetse",
+            "password": "password"
+        }
+    },
+    "gradingCriteria": {
+        "exam": 50,
+        "quiz": 25,
+        "homework": 25
+    }
+}

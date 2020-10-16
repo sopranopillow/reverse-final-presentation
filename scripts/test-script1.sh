@@ -1,0 +1,1 @@
+curl -X POST http://localhost:9090/flag -H "Content-Type: application/json" -d ""
