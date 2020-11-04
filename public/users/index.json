@@ -2,11 +2,18 @@
     "userList": {
         "rigo123": {
             "file": "321ogir",
-            "password": "password"
+            "password": "password",
+            "type": "student"
         },
         "esteban123": {
             "file": "321nabetse",
-            "password": "password"
+            "password": "password",
+            "type": "student"
+        },
+        "cheon123": {
+            "file": "321noech",
+            "password": "password",
+            "type": "admin"
         }
     },
     "gradingCriteria": {
