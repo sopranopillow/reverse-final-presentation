@@ -7,15 +7,20 @@
 export const csvToJson = (studentString) => {
     let lines = studentString.split('\n');
     let output = {};
-    const titles = lines[0].split(',').slice(1);
+    let titles = lines[0].split(',').slice(1);
+
+    // For some reason some titles have \r in the name, this removes it
+    titles = titles.map(title => title.replace('\r', ''));
 
     lines = lines.slice(1);
     titles.forEach(title => { output[title] = {} });
 
+    const isValid = val => (val !== "" && val !== " " && val !== undefined && val !== "\r");
+
     for (let i = 0; i < lines.length; i++) {
         const line = lines[i].split(',').slice(1);
         for (let j = 0; j < line.length; j++) {
-            if (line[j] !== "" && line[j] !== " " && line[j] !== undefined){
+            if (isValid(line[j])){
                 output[titles[j]][i+1] = parseInt(line[j]);
             }
         }

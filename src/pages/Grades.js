@@ -43,7 +43,7 @@ class Home extends React.Component {
                 json: json,
                 fileName: updateFileName
             }).then((response) => {
-                alert('Sent request successfuly', response);
+                alert('Sent request successfuly');
             }).catch((error) => {
                 alert('Error', error);
             });
