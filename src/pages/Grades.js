@@ -4,6 +4,7 @@ import { Nav, Content } from '../Components';
 import './Grades.css';
 import { csvToJson, jsonToCsv } from '../Parser';
 import FileSaver from 'file-saver';
+import axios from 'axios';
 
 class Home extends React.Component {
     validateFiles = undefined;
@@ -37,10 +38,15 @@ class Home extends React.Component {
         reader.onload = function() {
             const csv = reader.result;
             const json = csvToJson(csv);
-            const path = '../../public/users/';
 
-            const jsonFile = new File([new Blob([json], {type: 'text/json'})], `${updateFileName}.json`);
-            FileSaver.saveAs(jsonFile);
+            axios.post('http://localhost:50000/gradeupdate', {
+                json: json,
+                fileName: updateFileName
+            }).then((response) => {
+                alert('Response', response);
+            }).catch((error) => {
+                alert('Error', error);
+            });
         };
     }
 
@@ -166,11 +172,11 @@ class Home extends React.Component {
             <form className="form" onSubmit={this.uploadFile}>
                 <div className="formItem">
                     <div>File Name</div>
-                    <input onChange={handleUploadFileName}/>
+                    <input name="fileName" onChange={handleUploadFileName}/>
                 </div>
                 <div className="formItem">
                     <div>Upload file</div>
-                    <input className="formItem" type="file" ref={this.fileInput} />
+                    <input name="gradesFile" className="formItem" type="file" ref={this.fileInput} />
                 </div>
                 <input className="formItem" type="submit" value="Upload File"/>
             </form>

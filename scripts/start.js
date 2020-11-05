@@ -35,6 +35,26 @@ const createDevServerConfig = require('../config/webpackDevServer.config');
 const useYarn = fs.existsSync(paths.yarnLockFile);
 const isInteractive = process.stdout.isTTY;
 
+//////////// Server for file uploading
+const express = require('express');
+// const fs = require('fs');
+const app = express();
+
+app.post('/gradeupdate', (req, res) =>{ // localhost:50000/gradeupdate
+
+  // const json = req.json;
+  // const fileName = req.fileName;
+
+  // console.log(json, fileName)
+  console.log(req)
+  res.send("Grades updated");
+
+  // fs.writeFileSync(`../public/users/${fileName}.json`, JSON.stringify(json));
+});
+
+app.listen(50000)
+///////////////
+
 // Warn and crash if required files are missing
 if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
   process.exit(1);
