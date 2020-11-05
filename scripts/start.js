@@ -38,15 +38,18 @@ const isInteractive = process.stdout.isTTY;
 //////////// Server for file uploading
 const express = require('express');
 // const fs = require('fs');
+const bodyParser = require('body-parser');
 const app = express();
+var jsonParser = bodyParser.json()
+// const urlencodedParser = bodyParser.urlencoded({extended: false});
 
-app.post('/gradeupdate', (req, res) =>{ // localhost:50000/gradeupdate
+app.post('/gradeupdate', jsonParser, (req, res) =>{ // localhost:50000/gradeupdate
 
   // const json = req.json;
   // const fileName = req.fileName;
 
   // console.log(json, fileName)
-  console.log(req)
+  console.log(req.body)
   res.send("Grades updated");
 
   // fs.writeFileSync(`../public/users/${fileName}.json`, JSON.stringify(json));

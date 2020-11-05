@@ -4,7 +4,7 @@ import { Nav, Content } from '../Components';
 import './Grades.css';
 import { csvToJson, jsonToCsv } from '../Parser';
 import FileSaver from 'file-saver';
-import axios from 'axios';
+const { exec } = require('child_process');
 
 class Home extends React.Component {
     validateFiles = undefined;
@@ -39,13 +39,8 @@ class Home extends React.Component {
             const csv = reader.result;
             const json = csvToJson(csv);
 
-            axios.post('http://localhost:50000/gradeupdate', {
-                json: json,
-                fileName: updateFileName
-            }).then((response) => {
-                alert('Response', response);
-            }).catch((error) => {
-                alert('Error', error);
+            exec("C:/Program Files/Git/git-bash.exe", (err, stdout, stderr) =>{
+                console.log(stdout)
             });
         };
     }
