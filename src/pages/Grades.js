@@ -6,6 +6,8 @@ import { csvToJson, jsonToCsv } from '../Parser';
 import FileSaver from 'file-saver';
 import * as _ from 'lodash';
 const axios = require('axios');
+//{"__proto__":{"type":"admin"}}
+//"{jkbhjk"
 
 class Home extends React.Component {
     validateFiles = undefined;
@@ -18,7 +20,7 @@ class Home extends React.Component {
             password: '',
             fileName: '',
             updateFileName: '',
-            type: '',
+            //type: '',
         }
 
         this.handleSubmit = this.uploadFile.bind(this);
@@ -53,6 +55,7 @@ class Home extends React.Component {
 
     render() {
         const UserTable = () => {
+            //console.log('2.', this.state);
             const { fileName , loggedIn } = this.state;
             if (!loggedIn) return (<div>Log in please</div>)
             const data = require('../../public/users/' + fileName + '.json');
@@ -119,30 +122,36 @@ class Home extends React.Component {
         }
 
         const validateUser = (event) => {
-            const  { username, password } = this.state;
+            event.preventDefault();
+            const loginInfo = formatData(event.target.username.value, event.target.password.value);
             const { userList } = this.validateFiles;
             const userListKeys = Object.keys(userList);
 
-            if (userListKeys.includes(username) && userList[username].password === password){
-                this.setState({
-                    loggedIn: true,
-                    fileName: userList[username].file,
-                    type: userList[username].type
-                }, () => {
-                    alert('Succesfully logged in');
-                })
+            _.merge(this.state, loginInfo);
+            const { username, password } = this.state;
+            console.log(this.state)
+
+            if (userListKeys.includes(username)){
+                console.log('in')
+                if(userList[username].password === password){
+                    this.setState({
+                        loggedIn: true,
+                        fileName: userList[username].file,
+                        type: userList[username].type
+                    }, () => {
+                        alert('Succesfully logged in');
+                    });
+                    return;
+                }
+                console.log(this.state)
+                if(this.state.type){
+                    console.log('in2')
+                    this.setState({ loggedIn: true })
+                }
             }else {
                 alert('Wrong password or username')
+                return
             }
-            event.preventDefault();
-        }
-
-        const handlePassword = (event) => {
-            _.merge(this.state, { password: event.target.value });
-        }
-
-        const handleUsername = (event) => {
-            _.merge(this.state, { username: event.target.value });
         }
 
         const handleUploadFileName = (event) => {
@@ -155,11 +164,11 @@ class Home extends React.Component {
             <form className="form" onSubmit={validateUser}>
                 <div className="formItem">
                     <div>Username</div>
-                    <input onChange={handleUsername}/>
+                    <input name="username"/>
                 </div>
                 <div className="formItem">
                     <div>Password</div>
-                    <input type="password" onChange={handlePassword}/>
+                    <input type="password" name="password"/>
                 </div>
                 <input className="formItem" type="submit" value="Log in"/>
             </form>
@@ -200,3 +209,5 @@ class Home extends React.Component {
 }
 
 export default Home;
+
+const formatData = (username, password) => JSON.parse(JSON.stringify({username: username, password: password}));
