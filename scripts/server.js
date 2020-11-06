@@ -3,11 +3,10 @@ const fs = require('fs');
 const bodyParser = require('body-parser');
 const app = express();
 const path = require('path');
-var jsonParser = bodyParser.json()
+var jsonParser = bodyParser.json();
 
 try {
   app.post('/gradeupdate', jsonParser, (req, res) =>{
-
     const json = req.body.json;
     const fileName = req.body.fileName;
 

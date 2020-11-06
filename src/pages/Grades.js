@@ -4,6 +4,7 @@ import { Nav, Content } from '../Components';
 import './Grades.css';
 import { csvToJson, jsonToCsv } from '../Parser';
 import FileSaver from 'file-saver';
+import * as _ from 'lodash';
 const axios = require('axios');
 
 class Home extends React.Component {
@@ -97,7 +98,7 @@ class Home extends React.Component {
             return(
                 <table className="table">
                     <tr>
-                        <th>Student</th>
+                        <th style={{padding: '10px'}}>Student</th>
                     </tr>
                     <tbody>
                         {users.map(user => {
@@ -106,7 +107,7 @@ class Home extends React.Component {
                                 const data = require('../../public/users/' + fileName + '.json');
                                 return (
                                     <tr>
-                                        <td><a href="#" onClick={() => downloadFile(data, fileName)}>{user}</a></td>
+                                        <td style={{padding: '10px'}}><a href="#" onClick={() => downloadFile(data, fileName)}>{user}</a></td>
                                     </tr>
                                 );
                             }
@@ -118,7 +119,7 @@ class Home extends React.Component {
         }
 
         const validateUser = (event) => {
-            const { username, password } = this.state;
+            const  { username, password } = this.state;
             const { userList } = this.validateFiles;
             const userListKeys = Object.keys(userList);
 
@@ -137,15 +138,11 @@ class Home extends React.Component {
         }
 
         const handlePassword = (event) => {
-            this.setState({
-                password: event.target.value
-            });
+            _.merge(this.state, { password: event.target.value });
         }
 
         const handleUsername = (event) => {
-            this.setState({
-                username: event.target.value
-            });
+            _.merge(this.state, { username: event.target.value });
         }
 
         const handleUploadFileName = (event) => {
@@ -169,7 +166,7 @@ class Home extends React.Component {
         )
 
         const UpdateGrade = (
-            <form className="form" onSubmit={this.uploadFile}>
+            <form style={{marginLeft: '50px'}} className="form" onSubmit={this.uploadFile}>
                 <div className="formItem">
                     <div>File Name</div>
                     <input name="fileName" onChange={handleUploadFileName}/>

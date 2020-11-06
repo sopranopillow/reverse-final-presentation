@@ -9,7 +9,6 @@ export const csvToJson = (studentString) => {
     let output = {};
     let titles = lines[0].split(',').slice(1);
 
-    // For some reason some titles have \r in the name, this removes it
     titles = titles.map(title => title.replace('\r', ''));
 
     lines = lines.slice(1);
