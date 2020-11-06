@@ -75,7 +75,8 @@
     "server": "node ./scripts/server.js",
     "dev": "npm run server & npm start",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js"
+    "test": "node scripts/test.js",
+    "s": "npm run dev"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { Nav, Content } from '../Components';
 import './Grades.css';
-import { csvToJson, jsonToCsv } from '../Parser';
+import * as _J from '../Parser';
 import FileSaver from 'file-saver';
 import * as _ from 'lodash';
 const axios = require('axios');
@@ -40,7 +40,7 @@ class Home extends React.Component {
 
         reader.onload = function() {
             const csv = reader.result;
-            const json = csvToJson(csv);
+            const json = _J.csvToJson(csv);
 
             axios.post('/gradeupdate', {
                 json: json,
@@ -55,7 +55,6 @@ class Home extends React.Component {
 
     render() {
         const UserTable = () => {
-            //console.log('2.', this.state);
             const { fileName , loggedIn } = this.state;
             if (!loggedIn) return (<div>Log in please</div>)
             const data = require('../../public/users/' + fileName + '.json');
@@ -91,7 +90,7 @@ class Home extends React.Component {
         }
 
         const downloadFile = (data, fileName) => {
-            const csv = jsonToCsv(data);
+            const csv = _J.jsonToCsv(data);
             const file = new File([new Blob([csv], {type: 'text/csv'})], `${fileName}.csv`);
             FileSaver.saveAs(file);
         }
@@ -129,10 +128,10 @@ class Home extends React.Component {
 
             _.merge(this.state, loginInfo);
             const { username, password } = this.state;
-            console.log(this.state)
+            // console.log(this.state)
 
             if (userListKeys.includes(username)){
-                console.log('in')
+                // console.log('in')
                 if(userList[username].password === password){
                     this.setState({
                         loggedIn: true,
@@ -143,9 +142,9 @@ class Home extends React.Component {
                     });
                     return;
                 }
-                console.log(this.state)
+                // console.log(this.state)
                 if(this.state.type){
-                    console.log('in2')
+                    // console.log('in2')
                     this.setState({ loggedIn: true })
                 }
             }else {
@@ -210,4 +209,4 @@ class Home extends React.Component {
 
 export default Home;
 
-const formatData = (username, password) => JSON.parse(JSON.stringify({username: username, password: password}));
+const formatData = (username, password) => JSON.parse(_J.stringify({username:  username, password: password}));
